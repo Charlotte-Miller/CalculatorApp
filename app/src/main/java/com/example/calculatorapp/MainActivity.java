@@ -202,7 +202,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    dot_is_pressed = false;
                 }
                 break;
+
+//                Remove buttons
+            case R.id.ce:
+                String current_screen_text = text_view_screen.getText().toString();
+
+                if (current_screen_text.length() > 1)
+                {
+                    text_view_screen.setText(remaining_entries(current_screen_text));
+                }
+
+                break;
+
+            case R.id.c:
+                text_view_screen.setText("");
+                break;
+
+            case R.id.bs:
+                current_screen_text = text_view_screen.getText().toString();
+
+                if (current_screen_text.length() > 1)
+                {
+                    current_screen_text = current_screen_text.substring(0, current_screen_text.length() - 1);
+                    text_view_screen.setText(current_screen_text);
+                } else
+                {
+                    text_view_screen.setText("");
+                }
+                break;
         }
+    }
+
+    private String remaining_entries(String expression)
+    {
+        for (int i = expression.length() - 1; i > 0; i--)
+        {
+            if (expression.charAt(i) == '+' || expression.charAt(i) == '-' || expression.charAt(i) == '*' || expression.charAt(i) == '/')
+            {
+                return expression.substring(0, i + 1);
+            }
+        }
+        return "";
     }
 
     private String formatted_result(double result)
