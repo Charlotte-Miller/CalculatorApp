@@ -17,9 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     TextView text_view_screen;
 
-    boolean dot_is_pressed = false;
-    boolean operator_is_pressed = false;
-    boolean equal_is_pressed = false;
+    boolean dot_is_pressed, operator_is_pressed, equal_is_pressed, number_button_pressed;
 
     Button[] number_buttons;
 
@@ -92,23 +90,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_9.setOnClickListener(this);
 
         number_buttons = new Button[]{btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9};
+
+        dot_is_pressed = false;
+        operator_is_pressed = false;
+        equal_is_pressed = false;
+        number_button_pressed = false;
     }
 
     @Override
     public void onClick(View view)
     {
-
         for (Button number_button : number_buttons)
         {
+            number_button_pressed = view.getId() == number_button.getId();
 //        Reset the Text View if a number button is pressed after pressing equal button
-            if (equal_is_pressed && view.getId() == number_button.getId())
+            if (equal_is_pressed && number_button_pressed)
             {
                 text_view_screen.setText("");
                 equal_is_pressed = false;
-            } else if (equal_is_pressed && !(view.getId() == number_button.getId()))
+            }
+            else if (equal_is_pressed && !number_button_pressed)
             {
                 equal_is_pressed = false;
-            } else
+            }
+            else if (!number_button_pressed)
             {
                 dot_is_pressed = false;
             }
@@ -156,8 +161,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 {
                     text_view_screen.setText(String.format("%s.", text_view_screen.getText()));
                     dot_is_pressed = true;
-                    break;
                 }
+                break;
 
 //            Operator button handler
             case R.id.add:
@@ -193,13 +198,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.equal:
-                if (text_view_screen.getText() != "")
+                try
                 {
-                    text_view_screen.setText(formatted_result(result_from_math_expressions()));
+                    if (text_view_screen.getText() != "")
+                    {
+                        text_view_screen.setText(formatted_result(result_from_math_expressions()));
 
-                    equal_is_pressed = true;
-                    operator_is_pressed = false;
+                        equal_is_pressed = true;
+                        operator_is_pressed = false;
 //                    dot_is_pressed = false;
+                    }
+                } catch (Exception e)
+                {
+                    text_view_screen.setText("Error!");
+
                 }
                 break;
 
@@ -225,11 +237,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 {
                     current_screen_text = current_screen_text.substring(0, current_screen_text.length() - 1);
                     text_view_screen.setText(current_screen_text);
-                } else
+                }
+                else
                 {
                     text_view_screen.setText("");
                 }
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + view.getId());
         }
     }
 
@@ -237,7 +252,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         for (int i = expression.length() - 1; i > 0; i--)
         {
-            if (expression.charAt(i) == '+' || expression.charAt(i) == '-' || expression.charAt(i) == '*' || expression.charAt(i) == '/')
+            if (expression.charAt(i) == '+'
+                    || expression.charAt(i) == '-'
+                    || expression.charAt(i) == '*'
+                    || expression.charAt(i) == '/')
             {
                 return expression.substring(0, i + 1);
             }
@@ -250,10 +268,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (result == (int) result)
         {
             return String.valueOf((int) result);
-        } else
+        }
+        else
         {
             return String.valueOf(result);
         }
+
     }
 
     private double result_from_math_expressions()
