@@ -17,9 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     TextView text_view_screen;
 
-    boolean dot_is_pressed, operator_is_pressed, equal_is_pressed, number_button_pressed;
-
-    Button[] number_buttons;
+    boolean dot_is_pressed, operator_is_pressed, equal_is_pressed, any_number_button_pressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -89,36 +87,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_9 = (Button) findViewById(R.id.nine);
         btn_9.setOnClickListener(this);
 
-        number_buttons = new Button[]{btn_0, btn_1, btn_2, btn_3, btn_4, btn_5, btn_6, btn_7, btn_8, btn_9};
-
         dot_is_pressed = false;
         operator_is_pressed = false;
         equal_is_pressed = false;
-        number_button_pressed = false;
+        any_number_button_pressed = false;
     }
 
     @Override
     public void onClick(View view)
     {
-        for (Button number_button : number_buttons)
+        if (view.getTag() != null)
         {
-            number_button_pressed = view.getId() == number_button.getId();
-//        Reset the Text View if a number button is pressed after pressing equal button
-            if (equal_is_pressed && number_button_pressed)
+            String tag = view.getTag().toString();
+            any_number_button_pressed = tag.equals("number") || tag.equals("dot");
+
+            // Reset screen when press a number button after equal button
+            if (any_number_button_pressed)
             {
-                text_view_screen.setText("");
-                equal_is_pressed = false;
+                System.out.println(equal_is_pressed);
+                if (equal_is_pressed)
+                {
+                    text_view_screen.setText("");
+                }
+                operator_is_pressed = false; // Allow to press operator button after inputting a number
+                equal_is_pressed = false; // Reset equal pressing status
             }
-            else if (equal_is_pressed && !number_button_pressed)
-            {
-                equal_is_pressed = false;
-            }
-            else if (!number_button_pressed)
+        }
+        else
+        {
+            // Allow to press dot button after inputting a not-number character
+            if (dot_is_pressed)
             {
                 dot_is_pressed = false;
             }
-//        Allow to press operator buttons after pressing number button
-            operator_is_pressed = false;
+
+            // Allow to continue from the last result on the screen after inputting a not-number character
+            if (equal_is_pressed)
+            {
+                equal_is_pressed = false;
+            }
         }
 
         switch (view.getId())

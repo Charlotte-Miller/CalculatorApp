@@ -98,6 +98,7 @@
 
         <Button
                 android:id="@+id/seven"
+                android:tag="number"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_margin="4dp"
@@ -111,6 +112,7 @@
 
         <Button
                 android:id="@+id/eight"
+                android:tag="number"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_margin="4dp"
@@ -124,6 +126,7 @@
 
         <Button
                 android:id="@+id/nine"
+                android:tag="number"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_margin="4dp"
@@ -159,6 +162,7 @@
 
         <Button
                 android:id="@+id/four"
+                android:tag="number"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_margin="4dp"
@@ -172,6 +176,7 @@
 
         <Button
                 android:id="@+id/five"
+                android:tag="number"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_margin="4dp"
@@ -185,6 +190,7 @@
 
         <Button
                 android:id="@+id/six"
+                android:tag="number"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_margin="4dp"
@@ -221,6 +227,7 @@
 
         <Button
                 android:id="@+id/one"
+                android:tag="number"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_margin="4dp"
@@ -234,6 +241,7 @@
 
         <Button
                 android:id="@+id/two"
+                android:tag="number"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_margin="4dp"
@@ -247,6 +255,7 @@
 
         <Button
                 android:id="@+id/three"
+                android:tag="number"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_margin="4dp"
@@ -295,6 +304,7 @@
 
         <Button
                 android:id="@+id/zero"
+                android:tag="number"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_margin="4dp"
@@ -308,6 +318,7 @@
 
         <Button
                 android:id="@+id/dot"
+                android:tag="dot"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_margin="4dp"
