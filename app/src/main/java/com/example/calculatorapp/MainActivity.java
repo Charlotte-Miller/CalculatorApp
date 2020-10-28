@@ -248,6 +248,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.bs:
                 backspace();
+                // Fix bug: duplicate backspace when press math operators after BS button
+                operator_is_pressed = false;
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + view.getId());
