@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btn_ce, btn_c, btn_bs;
     Button btn_add, btn_subtract, btn_multiply, btn_divide, btn_equal, btn_dot, btn_lunisolar;
 
-    TextView text_view_screen;
+    TextView TextView_screen;
 
     boolean dot_is_pressed, operator_is_pressed, equal_is_pressed,
             any_number_button_pressed, any_math_operator_pressed;
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        text_view_screen = findViewById(R.id.screen);
+        TextView_screen = findViewById(R.id.screen);
 
         btn_ce = (Button) findViewById(R.id.ce);
         btn_ce.setOnClickListener(this);
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 if (equal_is_pressed)
                 {
-                    text_view_screen.setText("");
+                    TextView_screen.setText("");
                 }
             }
             else if (any_math_operator_pressed && operator_is_pressed)
@@ -139,41 +139,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
 //            Number buttons
             case R.id.one:
-                text_view_screen.setText(String.format("%s1", text_view_screen.getText()));
+                TextView_screen.setText(String.format("%s1", TextView_screen.getText()));
                 break;
             case R.id.two:
-                text_view_screen.setText(String.format("%s2", text_view_screen.getText()));
+                TextView_screen.setText(String.format("%s2", TextView_screen.getText()));
                 break;
             case R.id.three:
-                text_view_screen.setText(String.format("%s3", text_view_screen.getText()));
+                TextView_screen.setText(String.format("%s3", TextView_screen.getText()));
                 break;
             case R.id.four:
-                text_view_screen.setText(String.format("%s4", text_view_screen.getText()));
+                TextView_screen.setText(String.format("%s4", TextView_screen.getText()));
                 break;
             case R.id.five:
-                text_view_screen.setText(String.format("%s5", text_view_screen.getText()));
+                TextView_screen.setText(String.format("%s5", TextView_screen.getText()));
                 break;
             case R.id.six:
-                text_view_screen.setText(String.format("%s6", text_view_screen.getText()));
+                TextView_screen.setText(String.format("%s6", TextView_screen.getText()));
                 break;
             case R.id.seven:
-                text_view_screen.setText(String.format("%s7", text_view_screen.getText()));
+                TextView_screen.setText(String.format("%s7", TextView_screen.getText()));
                 break;
             case R.id.eight:
-                text_view_screen.setText(String.format("%s8", text_view_screen.getText()));
+                TextView_screen.setText(String.format("%s8", TextView_screen.getText()));
                 break;
             case R.id.nine:
-                text_view_screen.setText(String.format("%s9", text_view_screen.getText()));
+                TextView_screen.setText(String.format("%s9", TextView_screen.getText()));
                 break;
             case R.id.zero:
-                text_view_screen.setText(String.format("%s0", text_view_screen.getText()));
+                TextView_screen.setText(String.format("%s0", TextView_screen.getText()));
                 break;
 
             case R.id.dot:
 //                 Make dot button can only be pressed once
                 if (!dot_is_pressed)
                 {
-                    text_view_screen.setText(String.format("%s.", text_view_screen.getText()));
+                    TextView_screen.setText(String.format("%s.", TextView_screen.getText()));
                     dot_is_pressed = true;
                 }
                 break;
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.add:
                 if (!operator_is_pressed)
                 {
-                    text_view_screen.setText(String.format("%s+", text_view_screen.getText()));
+                    TextView_screen.setText(String.format("%s+", TextView_screen.getText()));
                     operator_is_pressed = true;
 //                    dot_is_pressed = false;
                 }
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.subtract:
                 if (!operator_is_pressed)
                 {
-                    text_view_screen.setText(String.format("%s-", text_view_screen.getText()));
+                    TextView_screen.setText(String.format("%s-", TextView_screen.getText()));
                     operator_is_pressed = true;
 //                    dot_is_pressed = false;
                 }
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.divide:
                 if (!operator_is_pressed)
                 {
-                    text_view_screen.setText(String.format("%s/", text_view_screen.getText()));
+                    TextView_screen.setText(String.format("%s/", TextView_screen.getText()));
                     operator_is_pressed = true;
 //                    dot_is_pressed = false;
                 }
@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.multiply:
                 if (!operator_is_pressed)
                 {
-                    text_view_screen.setText(String.format("%s*", text_view_screen.getText()));
+                    TextView_screen.setText(String.format("%s*", TextView_screen.getText()));
                     operator_is_pressed = true;
 //                    dot_is_pressed = false;
                 }
@@ -214,9 +214,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.equal:
                 try
                 {
-                    if (text_view_screen.getText() != "")
+                    if (TextView_screen.getText() != "")
                     {
-                        text_view_screen.setText(formatted_result(result_from_math_expressions()));
+                        TextView_screen.setText(formatted_result(result_from_math_expressions()));
 
                         equal_is_pressed = true;
                         operator_is_pressed = false;
@@ -224,24 +224,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 } catch (Exception e)
                 {
-                    text_view_screen.setText("Error");
+                    TextView_screen.setText("Error");
 
                 }
                 break;
 
 //                Remove buttons
             case R.id.ce:
-                String current_screen_text = text_view_screen.getText().toString();
+                String current_screen_text = TextView_screen.getText().toString();
 
                 if (current_screen_text.length() > 1)
                 {
-                    text_view_screen.setText(remaining_entries(current_screen_text));
+                    TextView_screen.setText(remaining_entries(current_screen_text));
                 }
 
                 break;
 
             case R.id.c:
-                text_view_screen.setText("");
+                TextView_screen.setText("");
                 break;
 
             case R.id.bs:
@@ -254,16 +254,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void backspace()
     {
-        String current_screen_text = text_view_screen.getText().toString();
+        String current_screen_text = TextView_screen.getText().toString();
         if (current_screen_text.length() > 1)
         {
-            text_view_screen.setText(
+            TextView_screen.setText(
                     current_screen_text.substring(0, current_screen_text.length() - 1)
             );
         }
         else
         {
-            text_view_screen.setText("");
+            TextView_screen.setText("");
         }
     }
 
@@ -297,6 +297,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private double result_from_math_expressions()
     {
-        return convert((String) text_view_screen.getText());
+        return convert((String) TextView_screen.getText());
     }
 }
