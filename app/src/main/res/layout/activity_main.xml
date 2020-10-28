@@ -76,6 +76,7 @@
 
         <Button
                 android:id="@+id/divide"
+                android:tag="math_operator"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_margin="4dp"
@@ -140,6 +141,7 @@
 
         <Button
                 android:id="@+id/multiply"
+                android:tag="math_operator"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_margin="4dp"
@@ -204,6 +206,7 @@
 
         <Button
                 android:id="@+id/subtract"
+                android:tag="math_operator"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_margin="4dp"
@@ -269,6 +272,7 @@
 
         <Button
                 android:id="@+id/add"
+                android:tag="math_operator"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_margin="4dp"

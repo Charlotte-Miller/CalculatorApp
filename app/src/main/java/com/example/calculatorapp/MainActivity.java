@@ -17,7 +17,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     TextView text_view_screen;
 
-    boolean dot_is_pressed, operator_is_pressed, equal_is_pressed, any_number_button_pressed;
+    boolean dot_is_pressed, operator_is_pressed, equal_is_pressed,
+            any_number_button_pressed, any_math_operator_pressed;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         operator_is_pressed = false;
         equal_is_pressed = false;
         any_number_button_pressed = false;
+        any_math_operator_pressed = false;
     }
 
     @Override
@@ -100,18 +103,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             String tag = view.getTag().toString();
             any_number_button_pressed = tag.equals("number") || tag.equals("dot");
+            any_math_operator_pressed = tag.equals("math_operator");
 
             // Reset screen when press a number button after equal button
             if (any_number_button_pressed)
             {
-                System.out.println(equal_is_pressed);
                 if (equal_is_pressed)
                 {
                     text_view_screen.setText("");
                 }
-                operator_is_pressed = false; // Allow to press operator button after inputting a number
-                equal_is_pressed = false; // Reset equal pressing status
             }
+            else if (any_math_operator_pressed && operator_is_pressed)
+            {
+                backspace();
+            }
+            operator_is_pressed = false; // Allow to press operator button after inputting a number
+            equal_is_pressed = false; // Reset equal pressing status
         }
         else
         {
@@ -217,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 } catch (Exception e)
                 {
-                    text_view_screen.setText("Error!");
+                    text_view_screen.setText("Error");
 
                 }
                 break;
@@ -238,20 +245,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.bs:
-                current_screen_text = text_view_screen.getText().toString();
-
-                if (current_screen_text.length() > 1)
-                {
-                    current_screen_text = current_screen_text.substring(0, current_screen_text.length() - 1);
-                    text_view_screen.setText(current_screen_text);
-                }
-                else
-                {
-                    text_view_screen.setText("");
-                }
+                backspace();
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + view.getId());
+        }
+    }
+
+    private void backspace()
+    {
+        String current_screen_text = text_view_screen.getText().toString();
+        if (current_screen_text.length() > 1)
+        {
+            text_view_screen.setText(
+                    current_screen_text.substring(0, current_screen_text.length() - 1)
+            );
+        }
+        else
+        {
+            text_view_screen.setText("");
         }
     }
 
