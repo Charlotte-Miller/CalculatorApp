@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean dot_is_pressed, operator_is_pressed, equal_is_pressed,
             any_number_button_pressed, any_math_operator_pressed;
 
+    String test;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
